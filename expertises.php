@@ -62,7 +62,7 @@ page_header('Nos expertises', 'Expertises CLEV Africa Consulting : fiscalité, j
               <h3><?= e($plan['name']) ?></h3>
               <p class="plan__price"><?= e($plan['price']) ?></p>
               <p><?= e($plan['description']) ?></p>
-              <a href="<?= e(contact_url('Autre', "Bonjour, je souhaite souscrire à l'abonnement {$plan['name']} ({$plan['price']}). Merci de me recontacter.")) ?>" class="btn btn--dark btn--block" data-magnetic><span>Souscrire</span></a>
+              <a href="<?= e(contact_url('Autre', "Bonjour, je souhaite souscrire à l'abonnement {$plan['name']} ({$plan['price']}). Merci de me recontacter.")) ?>" class="btn btn--dark btn--block"><span>Souscrire</span></a>
             </article>
           <?php endforeach; ?>
         </div>
@@ -75,7 +75,7 @@ page_header('Nos expertises', 'Expertises CLEV Africa Consulting : fiscalité, j
       <div class="container cta-band" data-reveal>
         <h2 class="title">Un besoin <em>spécifique</em> ?</h2>
         <p>Parlez-nous de votre situation : un expert vous répond sous 48 heures.</p>
-        <a href="index.php#contact" class="btn btn--primary" data-magnetic>
+        <a href="index.php#contact" class="btn btn--primary">
           <span>Prendre rendez-vous</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>

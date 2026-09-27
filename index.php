@@ -54,14 +54,14 @@ $prefSujet = to_utf8(trim((string) ($_GET['sujet'] ?? '')));
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
         <ul class="nav__list">
-          <li><a href="#a-propos" class="nav__link" data-magnetic>À propos</a></li>
-          <li><a href="expertises.php" class="nav__link" data-magnetic>Expertises</a></li>
-          <li><a href="#approche" class="nav__link" data-magnetic>Approche</a></li>
-          <li><a href="formations.php" class="nav__link" data-magnetic>Formations</a></li>
-          <li><a href="#references" class="nav__link" data-magnetic>Références</a></li>
-          <li><a href="#contact" class="nav__link" data-magnetic>Contact</a></li>
+          <li><a href="#a-propos" class="nav__link">À propos</a></li>
+          <li><a href="expertises.php" class="nav__link">Expertises</a></li>
+          <li><a href="#approche" class="nav__link">Approche</a></li>
+          <li><a href="formations.php" class="nav__link">Formations</a></li>
+          <li><a href="#references" class="nav__link">Références</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
-        <a href="#contact" class="btn btn--primary btn--sm nav__cta" data-magnetic>
+        <a href="#contact" class="btn btn--primary btn--sm nav__cta">
           <span>Parler à un expert</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -95,11 +95,11 @@ $prefSujet = to_utf8(trim((string) ($_GET['sujet'] ?? '')));
           CLEV Africa Consulting accompagne les entreprises et les institutions avec des solutions adaptées à leur situation&nbsp;: droit, fiscalité, social, douane, réglementation des changes, prix de transfert et management.
         </p>
         <div class="hero__actions" data-reveal data-delay="0.75">
-          <a href="#expertises" class="btn btn--primary" data-magnetic>
+          <a href="#expertises" class="btn btn--primary">
             <span>Découvrir nos expertises</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a href="#contact" class="btn btn--ghost" data-magnetic>
+          <a href="#contact" class="btn btn--ghost">
             <span>Prendre rendez-vous</span>
           </a>
         </div>
@@ -363,7 +363,7 @@ $prefSujet = to_utf8(trim((string) ($_GET['sujet'] ?? '')));
                 <span>Décrypter les lois de finances et sécuriser vos obligations déclaratives.</span>
               </li>
             </ul>
-            <a href="formations.php" class="btn btn--dark" data-reveal data-delay="0.3" data-magnetic>
+            <a href="formations.php" class="btn btn--dark" data-reveal data-delay="0.3">
               <span>Toutes nos formations</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
@@ -515,7 +515,7 @@ $prefSujet = to_utf8(trim((string) ($_GET['sujet'] ?? '')));
             <span>Votre message</span>
             <textarea name="message" rows="4" placeholder="Décrivez brièvement votre besoin…" required><?= e($prefSujet) ?></textarea>
           </label>
-          <button type="submit" class="btn btn--primary btn--block" data-magnetic>
+          <button type="submit" class="btn btn--primary btn--block">
             <span>Envoyer ma demande</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
@@ -530,7 +530,7 @@ $prefSujet = to_utf8(trim((string) ($_GET['sujet'] ?? '')));
       <div class="footer__brand">
         <img src="assets/logo/clev-africa-white.png" class="brand__logo brand__logo--light" alt="CLEV Africa Consulting">
         <p>Cabinet de conseil juridique, fiscal, social, douanier et en management. Douala · Bangui · Afrique.</p>
-        <a class="footer__social" href="https://www.linkedin.com/company/clevafricaconsulting/" target="_blank" rel="noopener" aria-label="LinkedIn CLEV Africa Consulting" data-magnetic>
+        <a class="footer__social" href="https://www.linkedin.com/company/clevafricaconsulting/" target="_blank" rel="noopener" aria-label="LinkedIn CLEV Africa Consulting">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v9M6 5v.5M10 18v-9M10 13c0-2.5 1.5-4 4-4s4 1.5 4 4v5"/></svg>
           <span>LinkedIn</span>
         </a>

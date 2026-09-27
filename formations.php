@@ -36,7 +36,7 @@ page_header('Séminaires & formations', 'Formations CLEV Africa Consulting : sé
               <a class="btn btn--primary btn--sm formation__cta" href="<?= e(contact_url(
                   'Management & formation',
                   "Bonjour, je souhaite m'inscrire à la formation « {$f['title']} ». Merci de me recontacter."
-              )) ?>" data-magnetic>
+              )) ?>">
                 <span>S'inscrire à cette formation</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
@@ -48,11 +48,11 @@ page_header('Séminaires & formations', 'Formations CLEV Africa Consulting : sé
           <h2 class="title">Une formation <em>sur mesure</em> ?</h2>
           <p>Nous construisons des programmes adaptés à votre contexte : fiscaux, juridiques, sociaux, douaniers ou managériaux. Demandez le catalogue complet ou décrivez votre besoin.</p>
           <div class="cta-band__actions">
-            <a href="index.php#contact" class="btn btn--primary" data-magnetic>
+            <a href="index.php#contact" class="btn btn--primary">
               <span>Demander le catalogue</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="expertises.php" class="btn btn--dark" data-magnetic>
+            <a href="expertises.php" class="btn btn--dark">
               <span>Voir nos domaines d'expertise</span>
             </a>
           </div>

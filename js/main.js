@@ -221,23 +221,6 @@
     });
   }
 
-  /* ---------- Magnetic buttons ---------- */
-  if (finePointer && !reduceMotion) {
-    $$("[data-magnetic]").forEach((el) => {
-      el.addEventListener("pointermove", (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) * 0.25;
-        const y = (e.clientY - r.top - r.height / 2) * 0.35;
-        el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
-        el.style.transition = "transform 0.15s ease-out";
-      });
-      el.addEventListener("pointerleave", () => {
-        el.style.transition = "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
-        el.style.transform = "";
-      });
-    });
-  }
-
   /* ---------- Ripple (touch feedback) ---------- */
   $$(".btn, .value, .card, .logo, .office, .step__num").forEach((el) => {
     el.addEventListener("pointerdown", (e) => {
