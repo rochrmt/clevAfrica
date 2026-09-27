@@ -16,11 +16,18 @@
   const intro = $("#intro");
   if (intro) {
     document.body.classList.add("is-locked");
+    // L'ancre (#contact…) est bloquée tant que is-locked est actif : on scroll après déverrouillage
+    const scrollToHash = () => {
+      const target = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+      if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72 });
+    };
     const endIntro = () => {
       intro.classList.add("is-done");
       document.body.classList.remove("is-locked");
       $(".hero")?.classList.add("is-inview");
       $$(".hero [data-reveal]").forEach((el) => el.classList.add("is-inview"));
+      scrollToHash();
+      setTimeout(scrollToHash, 600); // après le chargement des fonts/images
     };
     window.addEventListener("load", () => setTimeout(endIntro, reduceMotion ? 0 : 500), { once: true });
     setTimeout(endIntro, 3500); // safety
