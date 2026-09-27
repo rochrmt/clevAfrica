@@ -1,0 +1,232 @@
+{
+    "expertises": [
+        {
+            "id": "fiscalite",
+            "title": "Fiscalité",
+            "summary": "Conseil fiscal permanent, déclarations, audits et assistance en contrôle pour sécuriser vos obligations et optimiser votre charge fiscale.",
+            "services": [
+                "Conseil fiscal permanent sur toutes problématiques fiscales générales ou spécifiques à votre secteur d'activité",
+                "Veille fiscale permanente (tax alert, circulaire mensuelle, bulletin d'information, etc.)",
+                "Structuration et optimisation fiscales",
+                "Déclarations fiscales mensuelles et annuelles",
+                "Assistance dans l'élaboration des dossiers fiscaux en vue d'obtenir l'avis de l'Administration fiscale (éclaircissements ou rescrits)",
+                "Revue fiscale semestrielle ou annuelle",
+                "Audit fiscal avant clôture des comptes et revue fiscale de la DSF et de ses annexes",
+                "Assistance aux contrôles et contentieux fiscaux",
+                "Assistance dans le cadre des négociations de conventions d'établissement et de régimes fiscaux dérogatoires",
+                "Due diligence",
+                "Préparation des projets de transaction et conseils",
+                "Élaboration de la cartographie des risques fiscaux",
+                "Formation en matière fiscale (sujets proposés par le cabinet ou spécifiques sur votre demande, loi de finances)"
+            ],
+            "image": "assets/img/seminar-1.jpg"
+        },
+        {
+            "id": "juridique",
+            "title": "Juridique",
+            "summary": "Secrétariat juridique, restructurations, contrats et conformité OHADA pour sécuriser la vie de votre entreprise.",
+            "services": [
+                "Conseil et veille juridique",
+                "Secrétariat juridique",
+                "Restructuration d'entreprises",
+                "Audit juridique",
+                "Évaluation du Conseil d'Administration et de la Direction Générale",
+                "Assistance dans le cadre des négociations de conventions avec l'État centrafricain",
+                "Accompagnement en vue de l'obtention des agréments",
+                "Rédaction de projets de contrats civils et commerciaux",
+                "Revue des contrats de l'entreprise",
+                "Élaboration de la cartographie des risques juridiques",
+                "Formation en matière juridique (sujets proposés par le cabinet ou spécifiques sur votre demande)"
+            ],
+            "image": "assets/img/references-board.jpg"
+        },
+        {
+            "id": "gouvernance",
+            "title": "Gouvernance d'entreprise et contrôle interne",
+            "summary": "Mise en place et audit des outils de gouvernance et de contrôle interne pour une organisation conforme et maîtrisée.",
+            "services": [
+                "Mise en place des outils de bonne gouvernance et de conformité aux lois",
+                "Audit des outils de bonne gouvernance et de conformité aux lois",
+                "Élaboration de la cartographie des risques de gouvernance d'entreprises",
+                "Élaboration des outils pour une bonne maîtrise du contrôle au sein de l'entreprise",
+                "Audit de la pratique du contrôle interne de l'entreprise",
+                "Formation en matière de gouvernance d'entreprises et de contrôle interne"
+            ],
+            "image": "assets/img/post-novembre.jpg"
+        },
+        {
+            "id": "social-paie",
+            "title": "Social et paie",
+            "summary": "Paie, déclarations CNSS, audits sociaux et déploiement de logiciels de paie pour des équipes conformes et sereines.",
+            "services": [
+                "Conseil et veille sociale",
+                "Revue et audit de l'IRPP",
+                "Assistance au calcul, à la déclaration mensuelle et à l'auto-régularisation CNSS",
+                "Audit et revue en matière sociale",
+                "Assistance aux contrôles et contentieux CNSS",
+                "Assistance en matière de paie (mise en place de la paie, externalisation de la paie, optimisation fiscale de la paie)",
+                "Fourniture et déploiement des logiciels de paie",
+                "Formation des utilisateurs du logiciel de paie acquis",
+                "Formation en matière sociale et en matière de paie"
+            ],
+            "image": "assets/img/seminar-7.jpg"
+        },
+        {
+            "id": "douane-changes",
+            "title": "Douane et réglementation des changes",
+            "summary": "Sécurisation de vos opérations import-export et de leur conformité à la réglementation CEMAC et BEAC.",
+            "services": [
+                "Conseil et veille en matière douanière et en réglementation des changes",
+                "Audit des opérations douanières",
+                "Audit des opérations ayant une incidence avec la réglementation des changes",
+                "Assistance en contrôle et contentieux douaniers et en réglementation des changes",
+                "Formation en matière douanière et en réglementation des changes"
+            ],
+            "image": "assets/img/seminar-4.jpg"
+        },
+        {
+            "id": "prix-transfert",
+            "title": "Prix de transfert",
+            "summary": "Documentation, audit et défense de votre politique de prix de transfert et de vos transactions intragroupes.",
+            "services": [
+                "Préparation de la documentation des prix de transfert (documentation allégée et documentation complète)",
+                "Revue et audit des transactions intragroupes",
+                "Élaboration de la cartographie des risques des transactions intragroupes",
+                "Assistance en contrôle et contentieux en cas de différends sur les transactions intragroupes et la politique des prix de transfert choisie",
+                "Assistance en vue de la mise en place des accords préalables sur les prix",
+                "Formation sur les opérations intragroupes et les prix de transfert"
+            ],
+            "image": "assets/img/seminar-13.jpg"
+        },
+        {
+            "id": "ressources-humaines",
+            "title": "Ressources humaines",
+            "summary": "Contrats de travail, gestion des expatriés, recrutement et mobilité internationale pour vos équipes.",
+            "services": [
+                "Rédaction et revue des contrats de travail",
+                "Bilan et suivi de compétences des salariés",
+                "Assistance aux expatriés (obtention des autorisations de séjour et d'emploi, formalités administratives d'entrée sur le territoire)",
+                "Assistance au recrutement, mise à disposition de la main-d'œuvre et paiement de leur salaire",
+                "Conseil en mobilité internationale",
+                "Formation en matière de ressources humaines"
+            ],
+            "image": "assets/img/seminar-9.jpg"
+        }
+    ],
+    "abonnements": [
+        {
+            "id": "or",
+            "name": "OR",
+            "price": "2 500 000 FCFA / an",
+            "description": "Consultations et avis en matière fiscale, juridique, sociale, douanière, réglementation des changes, prix de transfert et ressources humaines."
+        },
+        {
+            "id": "diamant",
+            "name": "DIAMANT",
+            "price": "5 000 000 FCFA / an",
+            "description": "Abonnement Or + calendrier des obligations fiscales + revue trimestrielle de vos déclarations (TVA, retenues à la source IR 3 % et 15 %, IRPP, cotisations sociales) + revue DSF."
+        },
+        {
+            "id": "platinium",
+            "name": "PLATINIUM",
+            "price": "7 500 000 FCFA / an",
+            "description": "Abonnement Or + Diamant + revue fiscale annuelle de tous vos impôts et taxes + assistance au secrétariat juridique."
+        }
+    ],
+    "formations": [
+        {
+            "id": "role-responsabilite-manager",
+            "title": "Rôle et responsabilité du manager au sein de l'entreprise",
+            "meta": "Séminaire · Dirigeants, managers et futurs managers",
+            "description": "Affirmer son identité managériale, déployer des stratégies adaptatives et orienter la performance de son équipe.",
+            "image": "assets/img/seminar-10.jpg"
+        },
+        {
+            "id": "controle-interne",
+            "title": "Mettre à niveau le système de contrôle interne",
+            "meta": "Séminaire · En salle ou en intra-entreprise",
+            "description": "Cartographie des risques, procédures, séparation des tâches et pilotage des objectifs pour un contrôle interne efficace.",
+            "image": "assets/img/seminar-12.jpg"
+        },
+        {
+            "id": "actualites-fiscales-sociales-douanieres",
+            "title": "Actualités fiscales, sociales et douanières",
+            "meta": "Séminaire · Loi de finances et obligations déclaratives",
+            "description": "Décrypter les lois de finances, anticiper les changements réglementaires et sécuriser vos obligations déclaratives.",
+            "image": "assets/img/seminar-6.jpg"
+        },
+        {
+            "id": "gouvernance-controle-interne",
+            "title": "Gouvernance d'entreprise et contrôle interne",
+            "meta": "Formation · Sur demande",
+            "description": "Outils de bonne gouvernance, conformité aux lois et maîtrise du contrôle au sein de l'entreprise.",
+            "image": "assets/img/post-novembre.jpg"
+        },
+        {
+            "id": "paie-obligations-sociales",
+            "title": "Paie et obligations sociales",
+            "meta": "Formation · Équipes paie et RH",
+            "description": "Mise en place, externalisation et optimisation fiscale de la paie ; conformité et auto-régularisation CNSS.",
+            "image": "assets/img/seminar-9.jpg"
+        },
+        {
+            "id": "prix-transfert-intragroupes",
+            "title": "Prix de transfert et opérations intragroupes",
+            "meta": "Formation · Direction financière et fiscale",
+            "description": "Documentation des prix de transfert, gestion des transactions intragroupes et préparation aux contrôles.",
+            "image": "assets/img/seminar-13.jpg"
+        }
+    ],
+    "site_images": {
+        "hero": "assets/img/team.jpg",
+        "about": "assets/img/certificate.jpg",
+        "poster": "assets/img/seminar-poster.jpg",
+        "gallery": [
+            {
+                "src": "assets/img/seminar-1.jpg",
+                "caption": "Séminaire — Bangui",
+                "wide": false
+            },
+            {
+                "src": "assets/img/team.jpg",
+                "caption": "Photo de groupe",
+                "wide": true
+            },
+            {
+                "src": "assets/img/seminar-7.jpg",
+                "caption": "Contrôle interne",
+                "wide": false
+            },
+            {
+                "src": "assets/img/seminar-10.jpg",
+                "caption": "L'équipe",
+                "wide": false
+            },
+            {
+                "src": "assets/img/seminar-13.jpg",
+                "caption": "Intervention",
+                "wide": false
+            },
+            {
+                "src": "assets/img/seminar-12.jpg",
+                "caption": "Fin de session",
+                "wide": true
+            },
+            {
+                "src": "assets/img/seminar-6.jpg",
+                "caption": "Échanges",
+                "wide": false
+            },
+            {
+                "src": "assets/img/seminar-9.jpg",
+                "caption": "Restitution",
+                "wide": false
+            },
+            {
+                "src": "assets/img/seminar-4.jpg",
+                "caption": "La salle",
+                "wide": false
+            }
+        ]
+    }
+}

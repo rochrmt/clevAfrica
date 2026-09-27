@@ -1,3 +1,14 @@
+<?php
+require __DIR__ . '/inc.php';
+$data = load_content();
+$siteImg = $data['site_images'] ?? [];
+$gallery = $siteImg['gallery'] ?? [];
+
+// Pré-remplissage du formulaire de contact via ?domaine=…&sujet=…
+$prefDomaine = (string) ($_GET['domaine'] ?? '');
+if (!in_array($prefDomaine, CONTACT_DOMAINES, true)) $prefDomaine = '';
+$prefSujet = to_utf8(trim((string) ($_GET['sujet'] ?? '')));
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +21,7 @@
   <meta property="og:description" content="Nous mettons notre expertise à votre service. Droit · Fiscalité · Social · Douane · Prix de transfert · Management.">
   <meta property="og:image" content="assets/img/team.jpg">
   <meta property="og:type" content="website">
-  <link rel="icon" type="image/jpeg" href="assets/logo/clev-africa-consulting.jpg">
+  <link rel="icon" type="image/png" href="assets/logo/clev-africa.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
@@ -20,10 +31,7 @@
 
   <!-- Intro curtain -->
   <div class="intro" id="intro" aria-hidden="true">
-    <div class="intro__logo">
-      <span class="intro__word">Clev</span><span class="intro__word intro__word--accent">Africa</span>
-      <small>Consulting</small>
-    </div>
+    <img src="assets/logo/clev-africa-white.png" class="intro__logo-img" alt="CLEV Africa Consulting">
   </div>
 
   <!-- Custom cursor (desktop) -->
@@ -40,22 +48,16 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#accueil" class="brand" aria-label="CLEV Africa Consulting — Accueil" data-cursor="-hidden">
-        <svg class="brand__logo" viewBox="0 0 330 96" role="img" aria-label="CLEV Africa Consulting">
-          <text x="0" y="60" class="brand__txt">Clev</text>
-          <path class="brand__a-grey" d="M118 16 L140 66 L153 66 L131 16 Z"/>
-          <path class="brand__a-green" d="M140 66 L176 4 L189 4 L153 66 Z"/>
-          <text x="153" y="60" class="brand__txt">fr<tspan class="brand__i">i</tspan>ca</text>
-          <rect x="96" y="70" width="222" height="20" rx="3" class="brand__bar"/>
-          <text x="207" y="85" text-anchor="middle" class="brand__sub">CONSULTING</text>
-        </svg>
+        <img src="assets/logo/clev-africa.png" class="brand__logo brand__logo--main" alt="CLEV Africa Consulting">
+        <img src="assets/logo/clev-africa-white.png" class="brand__logo brand__logo--alt" alt="" aria-hidden="true">
       </a>
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
         <ul class="nav__list">
           <li><a href="#a-propos" class="nav__link" data-magnetic>À propos</a></li>
-          <li><a href="#expertises" class="nav__link" data-magnetic>Expertises</a></li>
+          <li><a href="expertises.php" class="nav__link" data-magnetic>Expertises</a></li>
           <li><a href="#approche" class="nav__link" data-magnetic>Approche</a></li>
-          <li><a href="#formations" class="nav__link" data-magnetic>Formations</a></li>
+          <li><a href="formations.php" class="nav__link" data-magnetic>Formations</a></li>
           <li><a href="#references" class="nav__link" data-magnetic>Références</a></li>
           <li><a href="#contact" class="nav__link" data-magnetic>Contact</a></li>
         </ul>
@@ -76,7 +78,7 @@
     <!-- HERO -->
     <section class="hero" id="accueil">
       <div class="hero__bg" data-parallax="0.25">
-        <img src="assets/img/team.jpg" alt="L'équipe CLEV Africa Consulting et ses clients lors d'un séminaire à Bangui" fetchpriority="high">
+        <img src="<?= e(site_image($siteImg, 'hero', 'assets/img/team.jpg')) ?>" alt="L'équipe CLEV Africa Consulting et ses clients lors d'un séminaire à Bangui" fetchpriority="high">
         <div class="hero__veil"></div>
       </div>
       <div class="hero__grain" aria-hidden="true"></div>
@@ -164,7 +166,7 @@
       <div class="container about__grid">
         <div class="about__media" data-reveal="mask">
           <figure class="tilt" data-tilt>
-            <img src="assets/img/certificate.jpg" alt="Remise d'attestation de participation à un séminaire CLEV Africa Consulting" loading="lazy">
+            <img src="<?= e(site_image($siteImg, 'about', 'assets/img/certificate.jpg')) ?>" alt="Remise d'attestation de participation à un séminaire CLEV Africa Consulting" loading="lazy">
             <figcaption>
               <span>Remise d'attestation</span>
               Séminaire de formation — Bangui
@@ -233,7 +235,7 @@
             </div>
             <h3>Droit des affaires</h3>
             <p>Constitution et restructuration de sociétés, secrétariat juridique, contrats, conformité OHADA, contentieux et accompagnement au quotidien de vos organes de gouvernance.</p>
-            <a href="#contact" class="card__link">En discuter <i>→</i></a>
+            <a href="expertises.php#juridique" class="card__link">En savoir plus <i>→</i></a>
           </article>
 
           <article class="card" data-spot data-reveal data-delay="0.08">
@@ -243,7 +245,7 @@
             </div>
             <h3>Fiscalité</h3>
             <p>Optimisation et sécurisation fiscale, revues, déclarations, assistance lors des contrôles et recours contentieux.</p>
-            <a href="#contact" class="card__link">En discuter <i>→</i></a>
+            <a href="expertises.php#fiscalite" class="card__link">En savoir plus <i>→</i></a>
           </article>
 
           <article class="card" data-spot data-reveal data-delay="0.16">
@@ -253,7 +255,7 @@
             </div>
             <h3>Social</h3>
             <p>Droit du travail, paie et déclarations CNSS, audits sociaux, gestion des relations avec l'administration du travail.</p>
-            <a href="#contact" class="card__link">En discuter <i>→</i></a>
+            <a href="expertises.php#social-paie" class="card__link">En savoir plus <i>→</i></a>
           </article>
 
           <article class="card" data-spot data-reveal data-delay="0.24">
@@ -263,7 +265,7 @@
             </div>
             <h3>Douane</h3>
             <p>Régimes douaniers, classement tarifaire, valeur en douane, litiges et optimisation de la chaîne import-export.</p>
-            <a href="#contact" class="card__link">En discuter <i>→</i></a>
+            <a href="expertises.php#douane-changes" class="card__link">En savoir plus <i>→</i></a>
           </article>
 
           <article class="card" data-spot data-reveal data-delay="0.32">
@@ -273,7 +275,7 @@
             </div>
             <h3>Réglementation des changes</h3>
             <p>Conformité à la réglementation des changes CEMAC (BEAC), domiciliation, rapatriement, dossiers et autorisations.</p>
-            <a href="#contact" class="card__link">En discuter <i>→</i></a>
+            <a href="expertises.php#douane-changes" class="card__link">En savoir plus <i>→</i></a>
           </article>
 
           <article class="card" data-spot data-reveal data-delay="0.4">
@@ -283,7 +285,7 @@
             </div>
             <h3>Prix de transfert</h3>
             <p>Politique de prix de transfert, documentation (fichier local, fichier principal), analyses de comparabilité et défense en contrôle.</p>
-            <a href="#contact" class="card__link">En discuter <i>→</i></a>
+            <a href="expertises.php#prix-transfert" class="card__link">En savoir plus <i>→</i></a>
           </article>
 
           <article class="card card--wide card--accent" data-spot data-reveal data-delay="0.48">
@@ -293,7 +295,7 @@
             </div>
             <h3>Management &amp; organisation</h3>
             <p>Mise à niveau du contrôle interne, procédures, gouvernance, formation des managers et accompagnement du changement pour des organisations plus performantes.</p>
-            <a href="#formations" class="card__link">Voir nos formations <i>→</i></a>
+            <a href="expertises.php#gouvernance" class="card__link">En savoir plus <i>→</i></a>
           </article>
         </div>
       </div>
@@ -361,15 +363,15 @@
                 <span>Décrypter les lois de finances et sécuriser vos obligations déclaratives.</span>
               </li>
             </ul>
-            <a href="#contact" class="btn btn--dark" data-reveal data-delay="0.3" data-magnetic>
-              <span>Demander le catalogue 2025</span>
+            <a href="formations.php" class="btn btn--dark" data-reveal data-delay="0.3" data-magnetic>
+              <span>Toutes nos formations</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
 
           <div class="training__poster" data-reveal="mask">
             <figure class="tilt" data-tilt>
-              <img src="assets/img/seminar-poster.jpg" alt="Affiche du séminaire de formation « Rôle et Responsabilité du Manager au sein de l'entreprise » — 19-20 juin 2025" loading="lazy">
+              <img src="<?= e(site_image($siteImg, 'poster', 'assets/img/seminar-poster.jpg')) ?>" alt="Affiche du séminaire de formation « Rôle et Responsabilité du Manager au sein de l'entreprise » — 19-20 juin 2025" loading="lazy">
             </figure>
           </div>
         </div>
@@ -383,15 +385,9 @@
           </p>
         </div>
         <div class="gallery__track" data-drag>
-          <figure class="shot"><img src="assets/img/seminar-1.jpg" alt="Participants attentifs lors d'un séminaire CLEV Africa" loading="lazy" draggable="false"><figcaption>Séminaire — Bangui</figcaption></figure>
-          <figure class="shot shot--wide"><img src="assets/img/team.jpg" alt="Photo de groupe avec les participants" loading="lazy" draggable="false"><figcaption>Photo de groupe</figcaption></figure>
-          <figure class="shot"><img src="assets/img/seminar-7.jpg" alt="Slide : Mettre à niveau le Système de Contrôle Interne" loading="lazy" draggable="false"><figcaption>Contrôle interne</figcaption></figure>
-          <figure class="shot"><img src="assets/img/seminar-10.jpg" alt="L'équipe de formation devant le kakemono CLEV Africa" loading="lazy" draggable="false"><figcaption>L'équipe</figcaption></figure>
-          <figure class="shot"><img src="assets/img/seminar-13.jpg" alt="Le formateur en pleine intervention" loading="lazy" draggable="false"><figcaption>Intervention</figcaption></figure>
-          <figure class="shot shot--wide"><img src="assets/img/seminar-12.jpg" alt="Participants réunis à la fin de la formation" loading="lazy" draggable="false"><figcaption>Fin de session</figcaption></figure>
-          <figure class="shot"><img src="assets/img/seminar-6.jpg" alt="Échanges entre participants" loading="lazy" draggable="false"><figcaption>Échanges</figcaption></figure>
-          <figure class="shot"><img src="assets/img/seminar-9.jpg" alt="Présentation d'une participante" loading="lazy" draggable="false"><figcaption>Restitution</figcaption></figure>
-          <figure class="shot"><img src="assets/img/seminar-4.jpg" alt="Vue de la salle de séminaire" loading="lazy" draggable="false"><figcaption>La salle</figcaption></figure>
+          <?php foreach ($gallery as $shot): ?>
+            <figure class="shot<?= !empty($shot['wide']) ? ' shot--wide' : '' ?>"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['caption'] ?? 'Séminaire CLEV Africa') ?>" loading="lazy" draggable="false"><figcaption><?= e($shot['caption'] ?? '') ?></figcaption></figure>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>
@@ -510,19 +506,14 @@
           <label class="field">
             <span>Domaine concerné</span>
             <select name="domaine">
-              <option>Droit des affaires</option>
-              <option>Fiscalité</option>
-              <option>Social</option>
-              <option>Douane</option>
-              <option>Réglementation des changes</option>
-              <option>Prix de transfert</option>
-              <option>Management &amp; formation</option>
-              <option>Autre</option>
+              <?php foreach (CONTACT_DOMAINES as $opt): ?>
+                <option<?= $opt === $prefDomaine ? ' selected' : '' ?>><?= e($opt) ?></option>
+              <?php endforeach; ?>
             </select>
           </label>
           <label class="field">
             <span>Votre message</span>
-            <textarea name="message" rows="4" placeholder="Décrivez brièvement votre besoin…" required></textarea>
+            <textarea name="message" rows="4" placeholder="Décrivez brièvement votre besoin…" required><?= e($prefSujet) ?></textarea>
           </label>
           <button type="submit" class="btn btn--primary btn--block" data-magnetic>
             <span>Envoyer ma demande</span>
@@ -537,14 +528,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <svg class="brand__logo brand__logo--light" viewBox="0 0 330 96" role="img" aria-label="CLEV Africa Consulting">
-          <text x="0" y="60" class="brand__txt">Clev</text>
-          <path class="brand__a-grey" d="M118 16 L140 66 L153 66 L131 16 Z"/>
-          <path class="brand__a-green" d="M140 66 L176 4 L189 4 L153 66 Z"/>
-          <text x="153" y="60" class="brand__txt">fr<tspan class="brand__i">i</tspan>ca</text>
-          <rect x="96" y="70" width="222" height="20" rx="3" class="brand__bar"/>
-          <text x="207" y="85" text-anchor="middle" class="brand__sub">CONSULTING</text>
-        </svg>
+        <img src="assets/logo/clev-africa-white.png" class="brand__logo brand__logo--light" alt="CLEV Africa Consulting">
         <p>Cabinet de conseil juridique, fiscal, social, douanier et en management. Douala · Bangui · Afrique.</p>
         <a class="footer__social" href="https://www.linkedin.com/company/clevafricaconsulting/" target="_blank" rel="noopener" aria-label="LinkedIn CLEV Africa Consulting" data-magnetic>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v9M6 5v.5M10 18v-9M10 13c0-2.5 1.5-4 4-4s4 1.5 4 4v5"/></svg>
@@ -555,22 +539,22 @@
       <nav class="footer__col" aria-label="Plan du site">
         <h4>Navigation</h4>
         <a href="#a-propos">À propos</a>
-        <a href="#expertises">Expertises</a>
+        <a href="expertises.php">Expertises</a>
         <a href="#approche">Approche</a>
-        <a href="#formations">Formations</a>
+        <a href="formations.php">Formations</a>
         <a href="#references">Références</a>
         <a href="#contact">Contact</a>
       </nav>
 
       <div class="footer__col">
         <h4>Expertises</h4>
-        <a href="#expertises">Droit des affaires</a>
-        <a href="#expertises">Fiscalité</a>
-        <a href="#expertises">Social</a>
-        <a href="#expertises">Douane</a>
-        <a href="#expertises">Réglementation des changes</a>
-        <a href="#expertises">Prix de transfert</a>
-        <a href="#expertises">Management</a>
+        <a href="expertises.php#juridique">Juridique</a>
+        <a href="expertises.php#fiscalite">Fiscalité</a>
+        <a href="expertises.php#social-paie">Social &amp; paie</a>
+        <a href="expertises.php#douane-changes">Douane &amp; changes</a>
+        <a href="expertises.php#prix-transfert">Prix de transfert</a>
+        <a href="expertises.php#ressources-humaines">Ressources humaines</a>
+        <a href="expertises.php#gouvernance">Gouvernance</a>
       </div>
 
       <div class="footer__col">

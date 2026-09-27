@@ -1,0 +1,11 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.traefik.yml
+node_modules
+*.md
+data/*.bak
+Copilot_*.png
+assets/logo/Downloads

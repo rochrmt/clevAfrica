@@ -1,0 +1,36 @@
+# Prérequis : un Traefik existant sur le réseau externe `proxy`
+# avec les entrypoints `web` / `websecure` et un resolver `letsencrypt`.
+# Adapte le nom du réseau et du resolver ci-dessous à ton installation.
+services:
+  clev-africa:
+    build: .
+    container_name: clev-africa
+    restart: unless-stopped
+    environment:
+      # mot de passe admin — mets-le dans un fichier .env (ADMIN_PASSWORD=…)
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-clevadmin}
+    volumes:
+      - ./data:/var/www/html/data
+      - ./uploads:/var/www/html/uploads
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      # HTTPS
+      - "traefik.http.routers.clev-africa.rule=Host(`clev-africa.mbila.pro`)"
+      - "traefik.http.routers.clev-africa.entrypoints=websecure"
+      - "traefik.http.routers.clev-africa.tls=true"
+      - "traefik.http.routers.clev-africa.tls.certresolver=letsencrypt"
+      # HTTP -> HTTPS
+      - "traefik.http.routers.clev-africa-http.rule=Host(`clev-africa.mbila.pro`)"
+      - "traefik.http.routers.clev-africa-http.entrypoints=web"
+      - "traefik.http.routers.clev-africa-http.middlewares=clev-africa-redirect"
+      - "traefik.http.middlewares.clev-africa-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.clev-africa-redirect.redirectscheme.permanent=true"
+      # port interne du conteneur
+      - "traefik.http.services.clev-africa.loadbalancer.server.port=80"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

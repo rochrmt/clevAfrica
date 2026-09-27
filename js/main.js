@@ -4,6 +4,8 @@
 (() => {
   "use strict";
 
+  document.documentElement.classList.add("js");
+
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const lerp = (a, b, t) => a + (b - a) * t;
@@ -12,15 +14,17 @@
 
   /* ---------- Intro ---------- */
   const intro = $("#intro");
-  document.body.classList.add("is-locked");
-  const endIntro = () => {
-    intro.classList.add("is-done");
-    document.body.classList.remove("is-locked");
-    $(".hero")?.classList.add("is-inview");
-    $$(".hero [data-reveal]").forEach((el) => el.classList.add("is-inview"));
-  };
-  window.addEventListener("load", () => setTimeout(endIntro, reduceMotion ? 0 : 500), { once: true });
-  setTimeout(endIntro, 3500); // safety
+  if (intro) {
+    document.body.classList.add("is-locked");
+    const endIntro = () => {
+      intro.classList.add("is-done");
+      document.body.classList.remove("is-locked");
+      $(".hero")?.classList.add("is-inview");
+      $$(".hero [data-reveal]").forEach((el) => el.classList.add("is-inview"));
+    };
+    window.addEventListener("load", () => setTimeout(endIntro, reduceMotion ? 0 : 500), { once: true });
+    setTimeout(endIntro, 3500); // safety
+  }
 
   /* ---------- Split text ---------- */
   $$("[data-split]").forEach((el) => {
@@ -55,40 +59,61 @@
   });
   $$(".logo").forEach((el, i) => el.style.setProperty("--i", i));
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("is-inview");
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+  const revealEls = $$("[data-reveal], [data-reveal-split], .steps, .logos").filter((el) => !el.closest(".hero"));
 
-  $$("[data-reveal], [data-reveal-split], .steps, .logos").forEach((el) => {
-    if (el.closest(".hero")) return; // handled by intro
-    io.observe(el);
-  });
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-inview");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-inview"));
+  }
+
+  // Fallback: guarantee reveal on scroll even if the observer never fires
+  const revealInView = () => {
+    revealEls.forEach((el) => {
+      if (el.classList.contains("is-inview")) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight * 0.92 && r.bottom > 0) el.classList.add("is-inview");
+    });
+  };
+  window.addEventListener("scroll", revealInView, { passive: true });
+  window.addEventListener("load", revealInView);
+  setTimeout(revealInView, 4000); // safety net
+  revealInView();
 
   /* ---------- Counters ---------- */
   const counters = $$("[data-count]");
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const target = +el.dataset.count;
-      const dur = 1600;
-      const start = performance.now();
-      const tick = (now) => {
-        const p = Math.min(1, (now - start) / dur);
-        const eased = 1 - Math.pow(1 - p, 4);
-        el.textContent = Math.round(target * eased).toLocaleString("fr-FR").replace(/\s/g, "");
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-      cio.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  counters.forEach((c) => cio.observe(c));
+  const runCounter = (el) => {
+    const target = +el.dataset.count;
+    const dur = 1600;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(target * eased).toLocaleString("fr-FR").replace(/\s/g, "");
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        runCounter(e.target);
+        cio.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach((c) => cio.observe(c));
+  } else {
+    counters.forEach((c) => { c.textContent = (+c.dataset.count).toLocaleString("fr-FR").replace(/\s/g, ""); });
+  }
 
   /* ---------- Header / progress / active link / totop ---------- */
   const header = $("#header");
@@ -101,11 +126,11 @@
   const onScroll = () => {
     const y = window.scrollY;
     const max = document.documentElement.scrollHeight - innerHeight;
-    progress.style.setProperty("--p", max > 0 ? (y / max).toFixed(4) : 0);
-    header.classList.toggle("is-scrolled", y > 40);
-    header.classList.toggle("is-hidden", y > lastY && y > 400 && !header.classList.contains("is-menu"));
+    progress?.style.setProperty("--p", max > 0 ? (y / max).toFixed(4) : 0);
+    header?.classList.toggle("is-scrolled", y > 40);
+    header?.classList.toggle("is-hidden", y > lastY && y > 400 && !header.classList.contains("is-menu"));
     lastY = y;
-    totop.classList.toggle("is-visible", y > innerHeight * 0.8);
+    totop?.classList.toggle("is-visible", y > innerHeight * 0.8);
 
     let current = null;
     sections.forEach((s) => { if (y >= s.offsetTop - innerHeight * 0.4) current = s.id; });
@@ -114,11 +139,12 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  totop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
+  totop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
 
   /* ---------- Mobile menu ---------- */
   const burger = $("#burger");
   const nav = $("#nav");
+  if (burger && nav) {
   const closeMenu = () => {
     nav.classList.remove("is-open");
     header.classList.remove("is-menu");
@@ -137,6 +163,7 @@
   });
   $$("a", nav).forEach((a) => a.addEventListener("click", closeMenu));
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+  }
 
   /* ---------- Parallax ---------- */
   const parallaxEls = $$("[data-parallax]");
@@ -221,7 +248,7 @@
 
   /* ---------- Custom cursor ---------- */
   const cursor = $("#cursor");
-  if (finePointer && !reduceMotion) {
+  if (cursor && finePointer && !reduceMotion) {
     document.body.classList.add("has-cursor");
     cursor.classList.add("is-hidden");
     const dot = $(".cursor__dot");
@@ -331,6 +358,7 @@
   /* ---------- Contact form ---------- */
   const form = $("#form");
   const note = $("#formNote");
+  if (form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     let valid = true;
@@ -356,9 +384,11 @@
     form.reset();
   });
   $$("input, textarea", form).forEach((i) => i.addEventListener("input", () => i.closest(".field").classList.remove("is-invalid")));
+  }
 
   /* ---------- Misc ---------- */
-  $("#year").textContent = new Date().getFullYear();
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // Smooth anchor offset for fixed header
   $$('a[href^="#"]').forEach((a) => {
