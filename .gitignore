@@ -1,4 +1,5 @@
 data/.admin_password
 data/*.bak
 uploads/
+.env
 assets/logo/Downloads/

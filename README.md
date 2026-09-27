@@ -34,16 +34,22 @@ Les contenus sont stockés dans `data/content.json` (sauvegarde automatique `.ba
 
 ## Déploiement Docker + Traefik
 
-Prérequis : un Traefik qui écoute sur le réseau externe `proxy` (entrypoints `web`/`websecure`, resolver `letsencrypt`). Si aucun Traefik ne tourne, `docker-compose.traefik.yml` en fournit un :
+Même architecture qu'AGEO : un Traefik global sur le VPS installé dans `/opt/traefik/` (réseau externe `traefik-proxy`, entrypoints `web`/`websecure`, resolver `letsencrypt`, redirection HTTP → HTTPS globale). Si Traefik n'est pas encore installé, le dossier `traefik/` contient tout le nécessaire (voir `traefik/README.md`) :
 
 ```bash
-docker compose -f docker-compose.traefik.yml up -d   # une seule fois
+docker network create traefik-proxy   # une seule fois
+cd /opt/traefik && docker compose up -d
+```
+
+Puis déployer le site :
+
+```bash
 docker compose up -d --build
 ```
 
 Le site est ensuite servi sur **https://clev-africa.mbila.pro** (HTTP → HTTPS automatique, certificat Let's Encrypt). Le DNS de `clev-africa.mbila.pro` doit pointer vers le serveur.
 
-- `data/` et `uploads/` sont montés en volumes : le contenu et les images survivent aux rebuilds
+- `clev-data` et `clev-uploads` sont des volumes nommés : le contenu et les images survivent aux rebuilds ; le contenu de `data/` est copié depuis l'image au premier démarrage
 - `data/` est bloqué côté Apache (`docker/deny-data.conf`) — `content.json` et `.admin_password` ne sont pas exposés
 - Mot de passe admin : variable `ADMIN_PASSWORD` (fichier `.env`)
 

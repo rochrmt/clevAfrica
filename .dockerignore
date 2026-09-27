@@ -3,8 +3,9 @@
 .dockerignore
 Dockerfile
 docker-compose.yml
-docker-compose.traefik.yml
+traefik/
 node_modules
+.env
 *.md
 data/*.bak
 Copilot_*.png
