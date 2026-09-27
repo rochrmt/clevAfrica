@@ -221,16 +221,15 @@
     });
   }
 
-  /* ---------- Ripple (touch feedback) ---------- */
-  $$(".btn, .value, .card, .logo, .office, .step__num").forEach((el) => {
+  /* ---------- Ripple (touch feedback — hors boutons/liens) ---------- */
+  $$(".value, .card, .logo, .office, .step__num").forEach((el) => {
     el.addEventListener("pointerdown", (e) => {
       if (reduceMotion) return;
       const r = el.getBoundingClientRect();
       const size = Math.max(r.width, r.height) * 2;
       const dot = document.createElement("span");
       dot.className = "ripple";
-      dot.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px;`;
-      if (!el.classList.contains("btn")) dot.style.background = "rgba(31,139,75,0.12)";
+      dot.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px;background:rgba(31,139,75,0.12);`;
       el.appendChild(dot);
       dot.addEventListener("animationend", () => dot.remove(), { once: true });
     }, { passive: true });
